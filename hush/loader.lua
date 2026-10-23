@@ -1,4 +1,4 @@
-local USER   = "phisutsin"
+local USER   = "phisutsin13"
 local REPO   = "Hush-script"
 local BRANCH = "main"
 

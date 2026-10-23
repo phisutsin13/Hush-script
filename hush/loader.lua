@@ -2,7 +2,7 @@ local USER   = "phisutsin13"
 local REPO   = "Hush-script"
 local BRANCH = "main"
 
-local BASE = ("https://raw.githubusercontent.com/%s/%s/%s/"):format(USER, REPO, BRANCH)
+local BASE = ("https://raw.githubusercontent.com/%s/%s/%s/hush/"):format(USER, REPO, BRANCH)
 local cache = {}
 
 local function req(path)

@@ -2,7 +2,7 @@ local USER   = "phisutsin13"
 local REPO   = "Hush-script"
 local BRANCH = "main"
 
-local BASE = ("https://raw.githubusercontent.com/%s/%s/%s/hush/"):format(USER, REPO, BRANCH)
+local BASE = ("https://github.com/phisutsin13/Hush-script.git"):format(USER, REPO, BRANCH)
 local cache = {}
 
 local function req(path)
@@ -11,7 +11,7 @@ local function req(path)
 	local ok, src = pcall(game.HttpGet, game, BASE .. "src/" .. path .. ".lua?t=" .. os.time())
 	if not ok then error("[loader] โหลด src/" .. path .. ".lua ไม่ได้: " .. tostring(src)) end
 
-	-- ใส่ require ของเราบรรทัดเดียวกัน → เลขบรรทัด error ตรงกับไฟล์จริง
+	
 	local fn, err = loadstring("local require = ...; " .. src, "=" .. path)
 	if not fn then error("[loader] syntax error ใน " .. path .. ": " .. tostring(err)) end
 

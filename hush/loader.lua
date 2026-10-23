@@ -2,11 +2,11 @@
 -- require("aimbot/target") = โหลดไฟล์ src/aimbot/target.lua จาก GitHub
 
 -- *** แก้ค่าเหล่านี้เป็นของคุณ ***
-local USER   = "ชื่อGitHubของคุณ"
-local REPO   = "ModularHub"
-local BRANCH = "main"
+local USER   = "phisutsin13"
+local REPO   = "Hush-script"
+local BRANCH = "hush"
 
-local BASE = ("https://raw.githubusercontent.com/%s/%s/%s/"):format(USER, REPO, BRANCH)
+local BASE = ("https://github.com/phisutsin13/Hush-script.git"):format(USER, REPO, BRANCH)
 local cache = {}
 
 local function req(path)

@@ -10,8 +10,13 @@ local function import(path)
 
 	if cache[path] ~= nil then return cache[path] end
 
-	-- เนื่องจาก init.lua และไฟล์อื่นๆ อยู่ใน src/ ให้ดึงผ่านเส้นทาง src/ ทั้งหมด
-	local url = BASE .. "src/" .. path .. ".lua?t=" .. os.time()
+	-- ถ้าเป็น init ให้ดึงจากโฟลเดอร์ hush/ โดยตรง แต่ถ้าเป็นตัวอื่นให้เข้า src/
+	local url
+	if path == "init" then
+		url = BASE .. "init.lua?t=" .. os.time()
+	else
+		url = BASE .. "src/" .. path .. ".lua?t=" .. os.time()
+	end
 
 	local ok, src = pcall(game.HttpGet, game, url)
 	if not ok then error("[loader] โหลด " .. path .. " ไม่ได้: " .. tostring(src)) end

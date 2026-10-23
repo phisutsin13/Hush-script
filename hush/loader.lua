@@ -3,7 +3,7 @@ local REPO   = "Hush-script"
 local BRANCH = "main"
 
 -- แก้ไขให้ BASE ชี้มาหยุดแค่ที่โฟลเดอร์ hush/ เท่านั้น
-local BASE = ("https://raw.githubusercontent.com/%s/%s/%s/hush/"):format(USER, REPO, BRANCH)
+local BASE = ("https://raw.githubusercontent.com/%s/%s/%s/"):format(USER, REPO, BRANCH)
 local cache = {}
 
 local function import(path)

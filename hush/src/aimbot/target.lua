@@ -1,7 +1,7 @@
 -- src/aimbot/target.lua — หา Head ของผู้เล่นที่ "ใกล้ที่สุด" ในระยะ (ใช้ .Magnitude)
 local Players = game:GetService("Players")
 local localPlayer = Players.LocalPlayer
-local isVisible = require("aimbot/visible")
+local isVisible = import("aimbot/visible")
 
 return function(S)
 	local cam = workspace.CurrentCamera

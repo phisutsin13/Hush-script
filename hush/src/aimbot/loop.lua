@@ -5,9 +5,9 @@ local BIND_NAME = "ModularHubAimbot"
 
 return function(ctx)
 	local S = ctx.State.Aimbot
-	local getTarget = require("aimbot/target")
-	local aimAt = require("aimbot/aim")
-	local autoFire = require("aimbot/autofire")
+	local getTarget = import("aimbot/target")
+	local aimAt = import("aimbot/aim")
+	local autoFire = import("aimbot/autofire")
 
 	-- HoldToAim: กดเมาส์ขวาค้างเพื่อล็อกเป้า
 	local holding = false

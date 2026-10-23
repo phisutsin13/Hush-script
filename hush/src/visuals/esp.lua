@@ -2,7 +2,7 @@
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local localPlayer = Players.LocalPlayer
-local createTag = require("visuals/esp_tag")
+local createTag = import("visuals/esp_tag")
 
 return function(ctx)
 	local S = ctx.State.Esp

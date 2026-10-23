@@ -4,8 +4,8 @@ return function(ctx)
 	local SS, JS = ctx.State.Speed, ctx.State.Jump
 	ui:AddTab("Player")
 
-	local speed = require("player/speed")(ctx)
-	local jump = require("player/jump")(ctx)
+	local speed = import("player/speed")(ctx)
+	local jump = import("player/jump")(ctx)
 
 	ui:AddToggle("Player", "WalkSpeed", SS.Enabled, speed.Set)
 	ui:AddSlider("Player", "Speed Value", 16, 200, SS.Value, function(v) SS.Value = v end)

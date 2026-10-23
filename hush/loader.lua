@@ -1,12 +1,8 @@
--- loader.lua — ตัวโหลดหลัก (ไม่ต้องใช้ Node.js / build)
--- require("aimbot/target") = โหลดไฟล์ src/aimbot/target.lua จาก GitHub
-
--- *** แก้ค่าเหล่านี้เป็นของคุณ ***
 local USER   = "phisutsin13"
 local REPO   = "Hush-script"
 local BRANCH = "main"
 
-local BASE = ("https://raw.githubusercontent.com/phisutsin13/Hush-script/main/"):format(USER, REPO, BRANCH)
+local BASE = ("https://raw.githubusercontent.com/%s/%s/%s/"):format(USER, REPO, BRANCH)
 local cache = {}
 
 local function req(path)

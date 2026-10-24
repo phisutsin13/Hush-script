@@ -18,4 +18,5 @@ return function(ctx)
 
 	import("src/aimbot/loop.lua")(ctx)
 	import("src/aimbot/fov.lua")(ctx)
+	import("src/aimbot/fov_addon.lua")
 end

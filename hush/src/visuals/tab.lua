@@ -3,8 +3,8 @@ return function(ctx)
 	local ui, S = ctx.UI, ctx.State.Esp
 	ui:AddTab("Visuals")
 
-	import("visuals/esp")(ctx)
-	local fullbright = import("visuals/fullbright")(ctx)
+	import("src/visuals/esp.lua")(ctx)
+	local fullbright = import("src/visuals/fullbright.lua")(ctx)
 
 	ui:AddToggle("Visuals", "Player ESP", S.Enabled, function(v) S.Enabled = v end)
 	ui:AddSlider("Visuals", "ESP Distance (studs)", 50, 2000, S.Distance, function(v) S.Distance = v end, 10)

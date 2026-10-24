@@ -10,5 +10,5 @@ return function(ctx)
 	ui:AddSlider("Aimbot", "Range (studs)", 50, 1500, S.Range, function(v) S.Range = v end, 10)
 	ui:AddSlider("Aimbot", "Smoothness", 1, 100, S.Smoothness, function(v) S.Smoothness = v end)
 
-	import("aimbot/loop")(ctx)
+	import("src/aimbot/loop.lua")(ctx)
 end

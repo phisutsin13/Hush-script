@@ -5,9 +5,11 @@ local BIND_NAME = "ModularHubAimbot"
 
 return function(ctx)
 	local S = ctx.State.Aimbot
-	local getTarget = import("aimbot/target")
-	local aimAt = import("aimbot/aim")
-	local autoFire = import("aimbot/autofire")
+	if S.FireRate == nil then S.FireRate = 0.1 end
+
+	local getTarget = import("src/aimbot/target.lua")
+	local aimAt = import("src/aimbot/aim.lua")
+	local autoFire = import("src/aimbot/autofire.lua")
 
 	-- HoldToAim: กดเมาส์ขวาค้างเพื่อล็อกเป้า
 	local holding = false

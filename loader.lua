@@ -2,24 +2,26 @@ local USER   = "phisutsin13"
 local REPO   = "Hush-script"
 local BRANCH = "main"
 
-local BASE = ("https://raw.githubusercontent.com/%s/%s/%s/hush/"):format(USER, REPO, BRANCH)
+local ROOT = ("https://raw.githubusercontent.com/%s/%s/%s/"):format(USER, REPO, BRANCH)
 local cache = {}
 
 local function import(path)
 	path = path:gsub("^%./", "")
-
 	if cache[path] ~= nil then return cache[path] end
 
-	-- ถ้าเป็น init ให้ดึงจากโฟลเดอร์ hush/ โดยตรง แต่ถ้าเป็นตัวอื่นให้เข้า src/
 	local url
-	if path == "init" then
-		url = BASE .. "init.lua?t=" .. os.time()
+	if path == "init" or path == "init.lua" then
+		url = ROOT .. "init.lua"
 	else
-		url = BASE .. "src/" .. path .. ".lua?t=" .. os.time()
+		if not path:find("%.lua$") then path = path .. ".lua" end
+		url = ROOT .. "hush/" .. path
 	end
+	url = url .. "?t=" .. os.time()
+	print("[import] " .. url)
 
 	local ok, src = pcall(game.HttpGet, game, url)
 	if not ok then error("[loader] โหลด " .. path .. " ไม่ได้: " .. tostring(src)) end
+	if src:sub(1, 3) == "404" then error("[loader] 404: " .. url) end
 
 	local fn, err = loadstring("local import = ...; " .. src, "=" .. path)
 	if not fn then error("[loader] syntax error ใน " .. path .. ": " .. tostring(err)) end

@@ -14,6 +14,7 @@ local function import(path)
 		url = ROOT .. "init.lua"
 	else
 		if not path:find("%.lua$") then path = path .. ".lua" end
+		if not path:find("^src/") then path = "src/" .. path end
 		url = ROOT .. "hush/" .. path
 	end
 	url = url .. "?t=" .. os.time()

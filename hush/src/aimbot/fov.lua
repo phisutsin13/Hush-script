@@ -1,32 +1,35 @@
--- src/aimbot/fov.lua — วงกลม FOV ที่ตามเมาส์
-local RunService = game:GetService("RunService")
+-- src/aimbot/target.lua — หา Head ที่ใกล้ที่สุดในระยะ และต้องอยู่ในวง FOV
+local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
+local localPlayer = Players.LocalPlayer
+local isVisible = import("src/aimbot/visible.lua")
 
-return function(ctx)
-	local S = ctx.State.Aimbot
+return function(S)
+	local cam = workspace.CurrentCamera
+	local myRoot = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
+	local origin = myRoot and myRoot.Position or cam.CFrame.Position
+	local mouse = UserInputService:GetMouseLocation()
+	local fovRadius = S.FovRadius or 150
 
-	if not Drawing then
-		warn("[fov] executor นี้ไม่รองรับ Drawing API")
-		return
-	end
+	local best, bestDist = nil, S.Range
+	for _, plr in ipairs(Players:GetPlayers()) do
+		if plr == localPlayer then continue end
+		if S.TeamCheck and plr.Team ~= nil and plr.Team == localPlayer.Team then continue end
 
-	local circle = Drawing.new("Circle")
-	circle.Thickness = 1
-	circle.NumSides = 64
-	circle.Filled = false
-	circle.Color = Color3.fromRGB(255, 255, 255)
-	circle.Visible = false
+		local char = plr.Character
+		local head = char and char:FindFirstChild("Head")
+		local hum = char and char:FindFirstChildOfClass("Humanoid")
+		if not head or not hum or hum.Health <= 0 then continue end
 
-	ctx.Janitor:Add(RunService.RenderStepped:Connect(function()
-		local show = S.ShowFov == true
-		circle.Visible = show
-		if show then
-			circle.Radius = S.FovRadius or 150
-			circle.Position = UserInputService:GetMouseLocation()
+		-- เช็คว่าอยู่ในวง FOV บนหน้าจอ
+		local pos, onScreen = cam:WorldToViewportPoint(head.Position)
+		if not onScreen then continue end
+		if (Vector2.new(pos.X, pos.Y) - mouse).Magnitude > fovRadius then continue end
+
+		local dist = (head.Position - origin).Magnitude
+		if dist < bestDist and (not S.WallCheck or isVisible(cam.CFrame.Position, head)) then
+			best, bestDist = head, dist
 		end
-	end))
-
-	ctx.Janitor:Add(function()
-		pcall(function() circle:Remove() end)
-	end)
+	end
+	return best
 end

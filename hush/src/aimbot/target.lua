@@ -21,7 +21,6 @@ return function(S)
 		local hum = char and char:FindFirstChildOfClass("Humanoid")
 		if not head or not hum or hum.Health <= 0 then continue end
 
-		-- เช็คว่าอยู่ในวง FOV บนหน้าจอ
 		local pos, onScreen = cam:WorldToViewportPoint(head.Position)
 		if not onScreen then continue end
 		if (Vector2.new(pos.X, pos.Y) - mouse).Magnitude > fovRadius then continue end

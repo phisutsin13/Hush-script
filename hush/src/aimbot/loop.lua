@@ -11,7 +11,6 @@ return function(ctx)
 	local aimAt = import("src/aimbot/aim.lua")
 	local autoFire = import("src/aimbot/autofire.lua")
 
-	-- HoldToAim: กดเมาส์ขวาค้างเพื่อล็อกเป้า
 	local holding = false
 	ctx.Janitor:Add(UserInputService.InputBegan:Connect(function(i)
 		if i.UserInputType == Enum.UserInputType.MouseButton2 then holding = true end
@@ -20,7 +19,6 @@ return function(ctx)
 		if i.UserInputType == Enum.UserInputType.MouseButton2 then holding = false end
 	end))
 
-	-- Bind หลังสคริปต์กล้องของ Roblox (Camera+1) ค่าจะไม่ถูกเขียนทับ
 	RunService:BindToRenderStep(BIND_NAME, Enum.RenderPriority.Camera.Value + 1, function()
 		if not S.Enabled or (S.HoldToAim and not holding) then return end
 		local target = getTarget(S)
